@@ -23,7 +23,7 @@ delete(instrfindall)
     if ~exist(params.data,'dir')
         mkdir(params.data);
     end
-    params.stim = 'C:\stimuli\gainBehavior\170202_stim.mat';
+    params.stim = 'C:\stimuli\gainBehavior\170202_trainingStim.mat';
     
     % start nidaq
     params.comPort  = 'COM8';
