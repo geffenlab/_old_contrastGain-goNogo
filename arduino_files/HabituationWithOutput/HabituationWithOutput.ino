@@ -1,8 +1,8 @@
 
-const int buttonPin   = 2;      // the number of the pushbutton pin
-const int ledPin      = 5;      // the number of the LED pin
+const int buttonPin   = 7;      // the number of the pushbutton pin
+const int ledPin      = 9;      // the number of the LED pin
 const int lickOut     = 8;
-const int waterOut    = 9;
+const int waterOut    = 6;
 
 int ledState = LOW;         // the current state of the output pin
 int buttonState;             // the current reading from the input pin
@@ -13,7 +13,7 @@ long lastReward;
 // the following variables are long's because the time, measured in miliseconds,
 // will quickly become a bigger number than can be stored in an int.
 long lastDebounceTime = 0;  // the last time the output pin was toggled
-long debounceDelay = 7000;    // the debounce time; increase if the output flickers
+long debounceDelay = 20000;    // the debounce time; increase if the output flickers
 
 // float variables from MATLAB (sent each session)
 float rewardDur;

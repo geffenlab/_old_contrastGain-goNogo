@@ -1,9 +1,9 @@
-const int lickPin = 2;
-const int soundPin = 3;
-const int waterPin = 5;
+const int lickPin = 7;
+const int soundPin = 5;
+const int waterPin = 9;
 
 const int lickOut = 8;
-const int waterOut = 9;
+const int waterOut = 10;
 
 
 // Variables
@@ -38,7 +38,7 @@ float patientWait = 2000000;
 
 // Debounce Variables
 long lastDebounceTime = 0;  // the last time the output pin was toggled
-long debounceDelay = 7000;    // the debounce time; increase if the output flickers
+long debounceDelay = 20000;    // the debounce time; increase if the output flickers
 
 void setup()
 {

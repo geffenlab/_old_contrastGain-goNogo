@@ -34,8 +34,6 @@ namp = params.noiseA;
 rd = params.rampD;
 offset = params.baseNoiseD + [.25 .5 .75 1];
 
-params.stim = 'C:\stimuli\gainBehavior\170126_trainingStim.mat';
-
 if ~exist(params.stim,'file')
     % make tones
     fprintf('Building stimuli...\n');
