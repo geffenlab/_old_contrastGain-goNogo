@@ -1,4 +1,4 @@
-function Training(params)
+function training(params)
 KbName('UnifyKeyNames');
 dbstop if error
 delete(instrfindall)
@@ -20,11 +20,6 @@ fn = fopen(fileGoto,'w');
 varvect = [params.holdD params.rewardD params.respD params.timeoutD];
 fprintf(s,'%f %f %f %f ',varvect);
 
-% modify params to reflect actual stimuli used
-params.dbSteps = params.dbSteps(1);
-params.dB = params.dB(1);
-params.toneA = params.toneA(1);
-
 % Make stimuli
 Fs = params.fsActual;
 f = params.toneF;
@@ -34,46 +29,14 @@ namp = params.noiseA;
 rd = params.rampD;
 offset = params.baseNoiseD + [.25 .5 .75 1];
 
-if ~exist(params.stim,'file')
-    % make tones
-    fprintf('Building stimuli...\n');
-    for i = 1:length(offset)
-        tmp = makeTone(Fs,f,sd,samp,offset(i)+params.postTargetTime,offset(i),rd,params.filt);
-        tone{i} = [tmp zeros(1,.02*Fs)];
-    end
-    
-    % make DRCs
-    for i = 1:length(offset)
-        for j = 1:params.nNoiseExemplars
-            [noise{i,j}] = makeDRC(Fs,rd,params.chordDuration,[params.baseNoiseD ...
-                offset(i) - params.baseNoiseD + params.postTargetTime],...
-                params.freqs,params.mu,params.sd,params.amp70, ...
-                params.filt);
-        end
-    end
-    fprintf('Done\n');
-    fprintf('Saving stimuli... ');
-    save(params.stim,'params','noise','tone');
-    fprintf(' done\n');
-else
-    % load it
-    fprintf('Loading stim...');
-    a=load(params.stim);
-    noise = a.noise;
-    tone = a.tone;
-    fprintf(' done\n');
-end
+% Build or load stim
+params.stim = 'C:\stimuli\gainBehavior\170213_training15kHzTarget.mat';
+constructStim;
 
-% make events
-pulseWidth = .02;
-for i = 1:length(tone)
-    tmp = zeros(1,length(tone{i}));
-    tEnd = round((offset(i)+params.toneD) * Fs);
-    tmp(1:pulseWidth*Fs) = 1;
-    tmp(tEnd:tEnd+(pulseWidth*Fs)) = 1;
-    events{i} = tmp;
-end
-
+% modify params to reflect actual stimuli used
+params.dbSteps = params.dbSteps(1);
+params.dB = params.dB(1);
+params.toneA = params.toneA(1);
 
 disp(' ');
 disp('Press any key to start TRAINING...');

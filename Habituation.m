@@ -1,11 +1,11 @@
-function Habituation_ephys(params)
+function habituation(params)
 KbName('UnifyKeyNames');
 dbstop if error
 delete(instrfindall)
 
 % Load arduino sketch and start the serial port
 hexPath = [params.hex filesep 'HabituationWithOutput.ino.hex'];
-[status, cmdOut] = loadArduinoSketch(params.comPort,hexPath);
+[~, cmdOut] = loadArduinoSketch(params.comPort,hexPath);
 cmdOut
 disp('STARTING SERIAL');
 s = setupSerial(params.comPort);

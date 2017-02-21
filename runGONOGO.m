@@ -23,7 +23,7 @@ delete(instrfindall)
     if ~exist(params.data,'dir')
         mkdir(params.data);
     end
-    params.stim = 'C:\stimuli\gainBehavior\170202_15kHzTarget.mat';
+    params.stim = 'C:\stimuli\gainBehavior\170213_15kHzTarget.mat';
     
     % start nidaq
     params.comPort  = 'COM8';
@@ -38,8 +38,8 @@ delete(instrfindall)
     params.toneF        = 15e3;
     params.toneD        = 25e-3;
     params.baseNoiseD   = 3;
-    params.noiseD       = [.05 .1 .25 .5 1 2 4 9] + params.baseNoiseD;
-    params.dbSteps      = [5 linspace(0,-15,6)]; %linspace(0,-20,5);
+    params.noiseD       = params.baseNoiseD + [.05 .1 .25 .5 1];%[.05 .1 .25 .5 1 2 4 9] + params.baseNoiseD;
+    params.dbSteps      = [linspace(5,-15,6)]; %linspace(0,-20,5);
     params.dB           = 70 + params.dbSteps;
     params.amp70        = .1;
     params.toneA        = params.amp70 .* 10 .^ (params.dbSteps./20);
@@ -65,13 +65,13 @@ delete(instrfindall)
         switch stage(cnt)
             case 0
                 disp('RUNNING HABITUATION');
-                Habituation(params);
+                habituation(params);
             case 1
                 disp('RUNNING TRAINING');
-                Training(params);
+                training(params);
             case 2
                 disp('RUNNING TESTING');
-                Testing(params);
+                testing(params);
             case 3
                 disp('RUNNING VARIABLE NOISE');
                 testingVarOffsets(params);

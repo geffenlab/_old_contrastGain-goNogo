@@ -10,7 +10,7 @@ cr = zeros(1,length(ts));
 
 for i = 1:length(trialType)
     resp(i) = ~isempty(ts(i).rewardend) || ~isempty(ts(i).timeoutend);
-    tType(i) = double(trialType{i}(2));
+    tType(i) = double(trialType(i,1));
     hit(i) = resp(i) == 1 && tType(i) ~= 0;
     cr(i) = resp(i) == 0 && tType(i) == 0;
 end
