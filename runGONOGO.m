@@ -55,7 +55,7 @@ delete(instrfindall)
     
     % task parameters
     params.holdD    = 1.5;
-    params.rewardD  = 0.0125;
+    params.rewardD  = 0.05;
     params.respD    = 1.2;
     params.timeoutD = 7.0;
     
